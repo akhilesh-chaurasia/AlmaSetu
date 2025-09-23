@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bell, Search, User, Settings, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/enhanced-button';
 import { Input } from '@/components/ui/input';
 import {
@@ -22,6 +23,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ user }) => {
+  const navigate = useNavigate();
   const [notifications] = React.useState([
     { id: 1, text: "New mentorship request from Sarah Chen", unread: true },
     { id: 2, text: "Job posting: Software Engineer at TechCorp", unread: true },
@@ -128,8 +130,8 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
             </>
           ) : (
             <div className="flex items-center space-x-2">
-              <Button variant="ghost">Sign In</Button>
-              <Button variant="hero">Get Started</Button>
+              <Button variant="ghost" onClick={() => navigate('/auth/signin')}>Sign In</Button>
+              <Button variant="hero" onClick={() => navigate('/auth/signup')}>Get Started</Button>
             </div>
           )}
         </div>

@@ -8,6 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Header from '@/components/layout/Header';
+import StartupPortal from '@/components/StartupPortal';
+import BackButton from '@/components/ui/back-button';
 import mentorshipBg from '@/assets/mentorship-bg.jpg';
 
 const AlumniDashboard: React.FC = () => {
@@ -111,6 +113,8 @@ const AlumniDashboard: React.FC = () => {
       />
       
       <div className="relative z-10 container px-6 py-8">
+        <BackButton to="/" />
+        
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Welcome back, {user.name}! 🌟</h1>
@@ -279,6 +283,9 @@ const AlumniDashboard: React.FC = () => {
                 </Button>
               </CardContent>
             </Card>
+
+            {/* Startup Portal */}
+            <StartupPortal userRole="alumni" />
           </div>
 
           {/* Sidebar */}

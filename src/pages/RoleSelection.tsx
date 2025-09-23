@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { useNavigate } from 'react-router-dom';
 import Header from '@/components/layout/Header';
+import BackButton from '@/components/ui/back-button';
 
 const RoleSelection: React.FC = () => {
   const navigate = useNavigate();
@@ -65,6 +66,8 @@ const RoleSelection: React.FC = () => {
       <Header />
       
       <div className="container px-6 py-12">
+        <BackButton to="/" />
+        
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Choose Your Role

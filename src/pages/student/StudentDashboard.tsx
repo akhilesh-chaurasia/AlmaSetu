@@ -9,6 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Header from '@/components/layout/Header';
+import StartupPortal from '@/components/StartupPortal';
+import BackButton from '@/components/ui/back-button';
 import dashboardBg from '@/assets/dashboard-bg.jpg';
 
 const StudentDashboard: React.FC = () => {
@@ -94,6 +96,8 @@ const StudentDashboard: React.FC = () => {
       />
       
       <div className="relative z-10 container px-6 py-8">
+        <BackButton to="/" />
+        
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">Welcome back, {user.name}! 👋</h1>
@@ -271,6 +275,9 @@ const StudentDashboard: React.FC = () => {
                 ))}
               </CardContent>
             </Card>
+
+            {/* Startup Portal */}
+            <StartupPortal userRole="student" />
           </div>
 
           {/* Sidebar */}

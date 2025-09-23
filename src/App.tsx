@@ -8,6 +8,8 @@ import RoleSelection from "./pages/RoleSelection";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import AlumniDashboard from "./pages/alumni/AlumniDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import SignIn from "./pages/auth/SignIn";
+import SignUp from "./pages/auth/SignUp";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/role-selection" element={<RoleSelection />} />
+          <Route path="/auth/signin" element={<SignIn />} />
+          <Route path="/auth/signup" element={<SignUp />} />
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="/alumni/dashboard" element={<AlumniDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
