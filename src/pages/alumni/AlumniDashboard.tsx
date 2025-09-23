@@ -1,429 +1,403 @@
 import React from 'react';
 import { 
-  Users, Calendar, Briefcase, TrendingUp, MessageSquare, 
-  Plus, Award, Clock, ChevronRight, MapPin, Building2, BookOpen
+  Users, Briefcase, Calendar, TrendingUp, MessageSquare, 
+  GraduationCap, Award, Building2, Network, Zap, UserCheck
 } from 'lucide-react';
 import { Button } from '@/components/ui/enhanced-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Header from '@/components/layout/Header';
-import StartupPortal from '@/components/StartupPortal';
 import BackButton from '@/components/ui/back-button';
+import MetricsWidget from '@/components/widgets/MetricsWidget';
+import ActivityWidget from '@/components/widgets/ActivityWidget';
+import ChartWidget from '@/components/widgets/ChartWidget';
+import QuickActionsWidget from '@/components/widgets/QuickActionsWidget';
 import mentorshipBg from '@/assets/mentorship-bg.jpg';
-import sarahChenAvatar from '@/assets/avatars/sarah-chen.jpg';
-import alexJohnsonAvatar from '@/assets/avatars/alex-johnson.jpg';
-import networkingMixerImage from '@/assets/events/networking-mixer.jpg';
-import panelDiscussionImage from '@/assets/events/panel-discussion.jpg';
 
 const AlumniDashboard: React.FC = () => {
   const user = {
     name: 'Sarah Chen',
     email: 'sarah.chen@gmail.com',
     role: 'alumni' as const,
-    avatar: sarahChenAvatar
+    avatar: ''
   };
 
-  const mentorshipRequests = [
+  const metricsData = [
     {
-      id: 1,
-      student: 'Alex Johnson',
-      major: 'Computer Science',
-      year: 'Junior',
-      interests: ['React', 'Node.js', 'Career Guidance'],
-      message: 'Hi Sarah! I\'m interested in pursuing a career in software engineering and would love to learn from your experience at Google.',
-      matchScore: 92,
-      requestDate: '2 days ago',
-      avatar: alexJohnsonAvatar
+      id: '1',
+      title: 'Active Mentees',
+      value: 12,
+      change: 15,
+      changeType: 'increase' as const,
+      icon: Users,
+      color: 'primary' as const,
+      subtitle: '3 new requests this week'
     },
     {
-      id: 2,
-      student: 'Maria Rodriguez',
-      major: 'Information Systems',
-      year: 'Senior',
-      interests: ['Product Management', 'Tech Leadership', 'Startups'],
-      message: 'Hello! I\'m graduating soon and considering product management roles. Your background would be incredibly valuable.',
-      matchScore: 87,
-      requestDate: '1 week ago',
-      avatar: ''
+      id: '2',
+      title: 'Jobs Posted',
+      value: 8,
+      change: 25,
+      changeType: 'increase' as const,
+      icon: Briefcase,
+      color: 'accent' as const,
+      subtitle: '150+ applications received'
+    },
+    {
+      id: '3',
+      title: 'Events Hosted',
+      value: 6,
+      change: 12,
+      changeType: 'increase' as const,
+      icon: Calendar,
+      color: 'success' as const,
+      subtitle: 'Next: Tech Career Fair 2024'
+    },
+    {
+      id: '4',
+      title: 'Network Connections',
+      value: 284,
+      change: 8,
+      changeType: 'increase' as const,
+      icon: Network,
+      color: 'warning' as const,
+      subtitle: 'Across 15 companies'
     }
   ];
 
-  const myMentees = [
+  const activityData = [
     {
-      id: 1,
-      name: 'John Smith',
-      major: 'Computer Science',
-      year: 'Sophomore',
-      avatar: '',
-      progress: 'Completed 3 sessions',
-      nextSession: 'March 20, 2024',
-      status: 'Active'
+      id: '1',
+      type: 'success' as const,
+      title: 'New Mentee Onboarded',
+      description: 'Alex Johnson from Computer Science program',
+      timestamp: '1 hour ago',
+      icon: UserCheck,
+      user: 'Alex Johnson'
     },
     {
-      id: 2,
-      name: 'Emma Davis',
-      major: 'Software Engineering',
-      year: 'Junior',
-      avatar: '',
-      progress: 'Completed 7 sessions',
-      nextSession: 'March 18, 2024',
-      status: 'Active'
+      id: '2',
+      type: 'primary' as const,
+      title: 'Job Posting Published',
+      description: 'Senior Software Engineer at TechCorp',
+      timestamp: '3 hours ago',
+      icon: Briefcase,
+      user: 'Sarah Chen'
+    },
+    {
+      id: '3',
+      type: 'info' as const,
+      title: 'Event Registration Closed',
+      description: 'Career Panel Discussion - 45 attendees confirmed',
+      timestamp: '1 day ago',
+      icon: Calendar,
+      user: 'Sarah Chen'
+    },
+    {
+      id: '4',
+      type: 'warning' as const,
+      title: 'Mentorship Session Reminder',
+      description: 'Session with Emma Davis scheduled for tomorrow',
+      timestamp: '2 days ago',
+      icon: MessageSquare,
+      user: 'Emma Davis'
     }
   ];
 
-  const stats = {
-    totalMentees: 15,
-    activeMentorships: 5,
-    hoursContributed: 120,
-    jobsPosted: 3,
-    eventsHosted: 8,
-    networkConnections: 250
-  };
+  const industryData = [
+    { name: 'Technology', value: 45, color: '#4F46E5' },
+    { name: 'Finance', value: 28, color: '#06B6D4' },
+    { name: 'Healthcare', value: 18, color: '#10B981' },
+    { name: 'Consulting', value: 15, color: '#F59E0B' },
+    { name: 'Education', value: 12, color: '#EF4444' }
+  ];
 
-  const recentActivity = [
+  const quickActions = [
     {
-      type: 'mentorship',
-      title: 'Completed session with John Smith',
-      time: '2 hours ago',
-      icon: Users
+      id: '1',
+      title: 'Review Mentorship Requests',
+      description: 'New students seeking guidance',
+      icon: Users,
+      color: 'primary' as const,
+      badge: '8 Pending',
+      onClick: () => console.log('Review requests')
     },
     {
-      type: 'job',
-      title: 'Posted Software Engineer position',
-      time: '1 day ago',
-      icon: Briefcase
+      id: '2',
+      title: 'Post Job Opportunity',
+      description: 'Share openings at your company',
+      icon: Briefcase,
+      color: 'success' as const,
+      onClick: () => console.log('Post job')
     },
     {
-      type: 'event',
-      title: 'Registered for Tech Career Fair',
-      time: '3 days ago',
-      icon: Calendar
+      id: '3',
+      title: 'Schedule Event',
+      description: 'Host workshops or networking sessions',
+      icon: Calendar,
+      color: 'accent' as const,
+      onClick: () => console.log('Create event')
     },
     {
-      type: 'connection',
-      title: 'Connected with 5 new alumni',
-      time: '1 week ago',
-      icon: MessageSquare
+      id: '4',
+      title: 'Connect with Alumni',
+      description: 'Expand your professional network',
+      icon: Network,
+      color: 'warning' as const,
+      badge: '12 Suggestions',
+      onClick: () => console.log('Network')
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       <Header user={user} />
       
-      {/* Interactive Background */}
-      <div className="fixed inset-0 overflow-hidden">
+      {/* Corporate Background Pattern */}
+      <div className="fixed inset-0 opacity-[0.02] pointer-events-none">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10 transform hover:scale-105 transition-transform duration-700"
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${mentorshipBg})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-success/5 via-transparent to-warning/5" />
-        <div className="absolute top-32 right-32 w-80 h-80 bg-success/10 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-32 left-32 w-64 h-64 bg-warning/10 rounded-full blur-3xl animate-pulse delay-500" />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-primary/5 rounded-full blur-2xl animate-pulse delay-1500" />
       </div>
       
-      <div className="relative z-10 container px-6 py-8">
+      <div className="relative container px-6 py-8 max-w-7xl mx-auto">
         <BackButton to="/" />
         
-        {/* Welcome Section */}
+        {/* Header Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Welcome back, {user.name}! 🌟</h1>
-          <p className="text-muted-foreground text-lg">
-            Ready to make a difference? Here's your mentorship and alumni engagement overview.
-          </p>
+          <div className="flex items-center space-x-4 mb-4">
+            <div className="w-12 h-12 bg-gradient-corporate rounded-xl flex items-center justify-center shadow-corporate">
+              <GraduationCap className="h-6 w-6 text-white" />
+            </div>
+            <div>
+              <h1 className="text-3xl font-bold text-foreground">Alumni Dashboard</h1>
+              <p className="text-muted-foreground">Welcome back, {user.name}! Manage your mentorship and alumni activities.</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-4">
+            <Badge variant="secondary" className="px-3 py-1">
+              <Building2 className="h-3 w-3 mr-1" />
+              Senior Software Engineer
+            </Badge>
+            <Badge variant="outline" className="px-3 py-1">
+              <Award className="h-3 w-3 mr-1" />
+              Top Mentor 2024
+            </Badge>
+            <div className="status-indicator bg-success"></div>
+            <span className="text-sm text-muted-foreground">Available</span>
+          </div>
         </div>
 
-        {/* Stats Overview */}
-        <div className="grid md:grid-cols-6 gap-4 mb-8">
-          <Card variant="gradient" className="text-center p-4">
-            <div className="text-2xl font-bold text-primary">{stats.totalMentees}</div>
-            <div className="text-sm text-muted-foreground">Total Mentees</div>
-          </Card>
-          <Card variant="gradient" className="text-center p-4">
-            <div className="text-2xl font-bold text-success">{stats.activeMentorships}</div>
-            <div className="text-sm text-muted-foreground">Active Mentorships</div>
-          </Card>
-          <Card variant="gradient" className="text-center p-4">
-            <div className="text-2xl font-bold text-accent">{stats.hoursContributed}</div>
-            <div className="text-sm text-muted-foreground">Hours Contributed</div>
-          </Card>
-          <Card variant="gradient" className="text-center p-4">
-            <div className="text-2xl font-bold text-warning">{stats.jobsPosted}</div>
-            <div className="text-sm text-muted-foreground">Jobs Posted</div>
-          </Card>
-          <Card variant="gradient" className="text-center p-4">
-            <div className="text-2xl font-bold text-primary">{stats.eventsHosted}</div>
-            <div className="text-sm text-muted-foreground">Events Hosted</div>
-          </Card>
-          <Card variant="gradient" className="text-center p-4">
-            <div className="text-2xl font-bold text-accent">{stats.networkConnections}</div>
-            <div className="text-sm text-muted-foreground">Connections</div>
-          </Card>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
+        {/* Main Dashboard Grid */}
+        <div className="grid lg:grid-cols-12 gap-6">
+          
+          {/* Left Column - Main Metrics and Charts */}
+          <div className="lg:col-span-8 space-y-6">
             
+            {/* Key Metrics */}
+            <MetricsWidget 
+              title="Alumni Impact Overview" 
+              metrics={metricsData}
+            />
+
+            {/* Industry Distribution */}
+            <ChartWidget
+              title="Alumni by Industry"
+              subtitle="Distribution of alumni across different sectors"
+              data={industryData}
+              type="pie"
+            />
+
+            {/* Recent Activity */}
+            <ActivityWidget
+              title="Recent Alumni Activities"
+              activities={activityData}
+            />
+          </div>
+
+          {/* Right Column - Quick Actions and Secondary Info */}
+          <div className="lg:col-span-4 space-y-6">
+            
+            {/* Quick Actions */}
+            <QuickActionsWidget
+              title="Quick Actions"
+              actions={quickActions}
+              layout="list"
+            />
+
             {/* Mentorship Requests */}
-            <Card variant="elevated">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center">
-                      <MessageSquare className="mr-2 h-5 w-5 text-primary" />
-                      Mentorship Requests
-                      <Badge variant="destructive" className="ml-2">{mentorshipRequests.length} New</Badge>
-                    </CardTitle>
-                    <CardDescription>
-                      Students seeking your mentorship and guidance
-                    </CardDescription>
-                  </div>
-                </div>
+            <Card className="widget-container">
+              <CardHeader className="widget-header">
+                <CardTitle className="flex items-center">
+                  <MessageSquare className="h-5 w-5 mr-2 text-primary" />
+                  Mentorship Requests
+                </CardTitle>
+                <Badge variant="destructive" className="text-xs">8 New</Badge>
               </CardHeader>
-              
-              <CardContent className="space-y-4">
-                {mentorshipRequests.map((request) => (
-                  <div key={request.id} className="p-4 border rounded-lg space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <Avatar className="h-10 w-10">
-                            <AvatarImage src={request.avatar} />
-                            <AvatarFallback className="bg-gradient-primary text-white">
-                              {request.student.split(' ').map(n => n[0]).join('')}
-                            </AvatarFallback>
-                          </Avatar>
-                          <div>
-                            <div className="flex items-center space-x-2">
-                              <h4 className="font-semibold">{request.student}</h4>
-                              <Badge variant="outline" className="text-xs">
-                                {request.matchScore}% match
+              <CardContent className="widget-content">
+                <div className="space-y-3">
+                  {[
+                    {
+                      name: 'Alex Johnson',
+                      major: 'Computer Science',
+                      year: 'Junior',
+                      interests: ['React', 'Career Guidance'],
+                      matchScore: 92
+                    },
+                    {
+                      name: 'Maria Rodriguez',
+                      major: 'Information Systems',
+                      year: 'Senior',
+                      interests: ['Product Management', 'Leadership'],
+                      matchScore: 87
+                    }
+                  ].map((request, index) => (
+                    <div key={index} className="data-point">
+                      <div className="flex items-start space-x-3 w-full">
+                        <Avatar className="h-10 w-10 flex-shrink-0">
+                          <AvatarFallback className="bg-primary/10 text-primary text-xs">
+                            {request.name.split(' ').map(n => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <h4 className="font-medium text-sm">{request.name}</h4>
+                            <Badge variant="outline" className="text-xs">
+                              {request.matchScore}% match
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground mb-2">
+                            {request.major} • {request.year}
+                          </p>
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            {request.interests.map((interest) => (
+                              <Badge key={interest} variant="secondary" className="text-xs">
+                                {interest}
                               </Badge>
-                            </div>
-                            <p className="text-sm text-muted-foreground">
-                              {request.major} • {request.year} • {request.requestDate}
-                            </p>
+                            ))}
+                          </div>
+                          <div className="flex space-x-2">
+                            <Button size="sm" variant="default" className="text-xs h-7">Accept</Button>
+                            <Button size="sm" variant="outline" className="text-xs h-7">View</Button>
                           </div>
                         </div>
                       </div>
-                    
-                    <div className="flex flex-wrap gap-1 mb-2">
-                      {request.interests.map((interest) => (
-                        <Badge key={interest} variant="secondary" className="text-xs">
-                          {interest}
-                        </Badge>
-                      ))}
                     </div>
-                    
-                    <p className="text-sm text-muted-foreground bg-muted/50 p-3 rounded italic">
-                      "{request.message}"
-                    </p>
-                    
-                    <div className="flex space-x-2">
-                      <Button size="sm" variant="success">
-                        Accept Request
-                      </Button>
-                      <Button size="sm" variant="outline">
-                        Schedule Call
-                      </Button>
-                      <Button size="sm" variant="ghost">
-                        Decline
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+                
+                <Button variant="ghost" className="w-full mt-3 text-primary hover:bg-primary/5">
+                  View All Requests (8)
+                </Button>
               </CardContent>
             </Card>
 
             {/* Current Mentees */}
-            <Card variant="elevated">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle className="flex items-center">
-                      <Users className="mr-2 h-5 w-5 text-primary" />
-                      Current Mentees
-                    </CardTitle>
-                    <CardDescription>
-                      Students you're actively mentoring
-                    </CardDescription>
-                  </div>
-                  <Button variant="outline" size="sm">View All</Button>
-                </div>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                {myMentees.map((mentee) => (
-                  <div key={mentee.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center space-x-4">
-                      <Avatar className="h-10 w-10">
-                        <AvatarImage src={mentee.avatar} />
-                        <AvatarFallback className="bg-gradient-primary text-white">
-                          {mentee.name.split(' ').map(n => n[0]).join('')}
-                        </AvatarFallback>
-                      </Avatar>
-                      
-                      <div>
-                        <div className="flex items-center space-x-2">
-                          <h4 className="font-semibold">{mentee.name}</h4>
-                          <Badge variant="success" className="text-xs">{mentee.status}</Badge>
-                        </div>
-                        <p className="text-sm text-muted-foreground">
-                          {mentee.major} • {mentee.year}
-                        </p>
-                        <p className="text-xs text-muted-foreground mt-1">
-                          {mentee.progress} • Next: {mentee.nextSession}
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex space-x-2">
-                      <Button size="sm" variant="outline">
-                        Message
-                      </Button>
-                      <Button size="sm">
-                        Schedule
-                      </Button>
-                    </div>
-                  </div>
-                ))}
-                
-                <Button variant="ghost" className="w-full">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Add New Mentee
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Startup Portal */}
-            <StartupPortal userRole="alumni" />
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            
-            {/* Quick Actions */}
-            <Card variant="premium">
-              <CardHeader>
-                <CardTitle className="text-lg">Quick Actions</CardTitle>
-              </CardHeader>
-              
-              <CardContent className="space-y-3">
-                <Button variant="gradient" className="w-full justify-start">
-                  <Plus className="mr-2 h-4 w-4" />
-                  Post Job Opportunity
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Calendar className="mr-2 h-4 w-4" />
-                  Create Event
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <Users className="mr-2 h-4 w-4" />
-                  Browse Students
-                </Button>
-                <Button variant="outline" className="w-full justify-start">
-                  <BookOpen className="mr-2 h-4 w-4" />
-                  Share Knowledge
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Recent Activity */}
-            <Card variant="elevated">
-              <CardHeader>
-                <CardTitle className="flex items-center text-lg">
-                  <TrendingUp className="mr-2 h-5 w-5 text-primary" />
-                  Recent Activity
+            <Card className="widget-container">
+              <CardHeader className="widget-header">
+                <CardTitle className="flex items-center">
+                  <Users className="h-5 w-5 mr-2 text-success" />
+                  Active Mentees
                 </CardTitle>
               </CardHeader>
-              
-              <CardContent className="space-y-3">
-                {recentActivity.map((activity, index) => (
-                  <div key={index} className="flex items-start space-x-3 p-2">
-                    <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                      <activity.icon className="h-4 w-4 text-primary" />
+              <CardContent className="widget-content">
+                <div className="space-y-3">
+                  {[
+                    {
+                      name: 'John Smith',
+                      major: 'Computer Science',
+                      progress: 'Session 3/10',
+                      nextSession: 'March 20',
+                      status: 'On Track'
+                    },
+                    {
+                      name: 'Emma Davis',
+                      major: 'Software Engineering',
+                      progress: 'Session 7/10',
+                      nextSession: 'March 18',
+                      status: 'Excellent'
+                    }
+                  ].map((mentee, index) => (
+                    <div key={index} className="data-point">
+                      <div className="flex items-center space-x-3 w-full">
+                        <Avatar className="h-8 w-8">
+                          <AvatarFallback className="bg-success/10 text-success text-xs">
+                            {mentee.name.split(' ').map(n => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between">
+                            <h4 className="font-medium text-sm">{mentee.name}</h4>
+                            <Badge 
+                              variant={mentee.status === 'Excellent' ? 'default' : 'secondary'} 
+                              className="text-xs"
+                            >
+                              {mentee.status}
+                            </Badge>
+                          </div>
+                          <p className="text-xs text-muted-foreground">
+                            {mentee.major} • {mentee.progress}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            Next: {mentee.nextSession}
+                          </p>
+                        </div>
+                        
+                        <Button size="sm" variant="outline" className="text-xs">Message</Button>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium">{activity.title}</p>
-                      <p className="text-xs text-muted-foreground">{activity.time}</p>
-                    </div>
-                  </div>
-                ))}
-                
-                <Button variant="ghost" size="sm" className="w-full">
-                  View All Activity
-                  <ChevronRight className="ml-1 h-3 w-3" />
-                </Button>
+                  ))}
+                </div>
               </CardContent>
             </Card>
 
             {/* Upcoming Events */}
-            <Card variant="elevated">
-              <CardHeader>
-                <CardTitle className="flex items-center text-lg">
-                  <Calendar className="mr-2 h-5 w-5 text-primary" />
+            <Card className="widget-container">
+              <CardHeader className="widget-header">
+                <CardTitle className="flex items-center">
+                  <Calendar className="h-5 w-5 mr-2 text-accent" />
                   Your Events
                 </CardTitle>
               </CardHeader>
-              
-              <CardContent className="space-y-3">
-                {[
-                  {
-                    title: 'Career Panel Discussion',
-                    date: 'March 22, 2024',
-                    time: '2:00 PM',
-                    type: 'Speaking',
-                    attendees: 45,
-                    image: panelDiscussionImage
-                  },
-                  {
-                    title: 'Alumni Networking Mixer',
-                    date: 'March 28, 2024',
-                    time: '6:00 PM',
-                    type: 'Hosting',
-                    attendees: 120,
-                    image: networkingMixerImage
-                  }
-                ].map((event, index) => (
-                  <div key={index} className="group">
-                    <div className="relative overflow-hidden rounded-lg mb-3">
-                      {event.image && (
-                        <img 
-                          src={event.image} 
-                          alt={event.title}
-                          className="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <Badge 
-                        variant="outline" 
-                        className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-xs"
-                      >
-                        {event.type}
-                      </Badge>
-                    </div>
-                    <div className="p-3 border rounded-lg space-y-2 group-hover:shadow-md transition-shadow">
-                      <h4 className="font-semibold text-sm">{event.title}</h4>
-                      <div className="text-xs text-muted-foreground space-y-1">
-                        <div className="flex items-center">
-                          <Clock className="mr-1 h-3 w-3" />
+              <CardContent className="widget-content">
+                <div className="space-y-3">
+                  {[
+                    {
+                      title: 'Career Panel Discussion',
+                      date: 'March 22, 2024',
+                      time: '2:00 PM',
+                      role: 'Speaking',
+                      attendees: 45
+                    },
+                    {
+                      title: 'Alumni Networking Mixer',
+                      date: 'March 28, 2024',
+                      time: '6:00 PM',
+                      role: 'Hosting',
+                      attendees: 120
+                    }
+                  ].map((event, index) => (
+                    <div key={index} className="data-point">
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <h4 className="font-medium text-sm">{event.title}</h4>
+                          <Badge variant="outline" className="text-xs">{event.role}</Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground mb-1">
                           {event.date} at {event.time}
-                        </div>
-                        <div className="flex items-center">
-                          <Users className="mr-1 h-3 w-3" />
+                        </p>
+                        <p className="text-xs text-muted-foreground">
                           {event.attendees} registered
-                        </div>
+                        </p>
                       </div>
                     </div>
-                  </div>
-                ))}
-                
-                <Button variant="ghost" size="sm" className="w-full">
-                  Manage Events
-                  <ChevronRight className="ml-1 h-3 w-3" />
-                </Button>
+                  ))}
+                </div>
               </CardContent>
             </Card>
           </div>
