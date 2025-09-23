@@ -12,13 +12,17 @@ import Header from '@/components/layout/Header';
 import StartupPortal from '@/components/StartupPortal';
 import BackButton from '@/components/ui/back-button';
 import dashboardBg from '@/assets/dashboard-bg.jpg';
+import sarahChenAvatar from '@/assets/avatars/sarah-chen.jpg';
+import michaelRodriguezAvatar from '@/assets/avatars/michael-rodriguez.jpg';
+import alexJohnsonAvatar from '@/assets/avatars/alex-johnson.jpg';
+import careerFairImage from '@/assets/events/career-fair.jpg';
 
 const StudentDashboard: React.FC = () => {
   const user = {
     name: 'Alex Johnson',
     email: 'alex.johnson@university.edu',
     role: 'student' as const,
-    avatar: ''
+    avatar: alexJohnsonAvatar
   };
 
   const upcomingEvents = [
@@ -29,7 +33,8 @@ const StudentDashboard: React.FC = () => {
       time: '10:00 AM',
       location: 'Main Auditorium',
       attendees: 150,
-      type: 'Career Fair'
+      type: 'Career Fair',
+      image: careerFairImage
     },
     {
       id: 2,
@@ -38,7 +43,8 @@ const StudentDashboard: React.FC = () => {
       time: '6:00 PM',
       location: 'Alumni Center',
       attendees: 75,
-      type: 'Networking'
+      type: 'Networking',
+      image: ''
     }
   ];
 
@@ -50,7 +56,7 @@ const StudentDashboard: React.FC = () => {
       company: 'Google',
       expertise: ['React', 'Node.js', 'System Design'],
       matchScore: 95,
-      avatar: '',
+      avatar: sarahChenAvatar,
       experience: '8 years'
     },
     {
@@ -60,7 +66,7 @@ const StudentDashboard: React.FC = () => {
       company: 'Microsoft',
       expertise: ['Product Strategy', 'Data Analysis', 'Leadership'],
       matchScore: 89,
-      avatar: '',
+      avatar: michaelRodriguezAvatar,
       experience: '6 years'
     },
     {
@@ -341,28 +347,43 @@ const StudentDashboard: React.FC = () => {
               
               <CardContent className="space-y-4">
                 {upcomingEvents.map((event) => (
-                  <div key={event.id} className="space-y-2 p-3 border rounded-lg">
-                    <div className="flex items-center justify-between">
+                  <div key={event.id} className="group">
+                    <div className="relative overflow-hidden rounded-lg mb-3">
+                      {event.image && (
+                        <img 
+                          src={event.image} 
+                          alt={event.title}
+                          className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <Badge 
+                        variant="outline" 
+                        className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-xs"
+                      >
+                        {event.type}
+                      </Badge>
+                    </div>
+                    <div className="space-y-2 p-3 border rounded-lg group-hover:shadow-md transition-shadow">
                       <h4 className="font-semibold text-sm">{event.title}</h4>
-                      <Badge variant="outline" className="text-xs">{event.type}</Badge>
+                      <div className="text-xs text-muted-foreground space-y-1">
+                        <div className="flex items-center">
+                          <Clock className="mr-1 h-3 w-3" />
+                          {event.date} at {event.time}
+                        </div>
+                        <div className="flex items-center">
+                          <MapPin className="mr-1 h-3 w-3" />
+                          {event.location}
+                        </div>
+                        <div className="flex items-center">
+                          <Users className="mr-1 h-3 w-3" />
+                          {event.attendees} attendees
+                        </div>
+                      </div>
+                      <Button size="sm" variant="outline" className="w-full hover-scale">
+                        RSVP
+                      </Button>
                     </div>
-                    <div className="text-xs text-muted-foreground space-y-1">
-                      <div className="flex items-center">
-                        <Clock className="mr-1 h-3 w-3" />
-                        {event.date} at {event.time}
-                      </div>
-                      <div className="flex items-center">
-                        <MapPin className="mr-1 h-3 w-3" />
-                        {event.location}
-                      </div>
-                      <div className="flex items-center">
-                        <Users className="mr-1 h-3 w-3" />
-                        {event.attendees} attendees
-                      </div>
-                    </div>
-                    <Button size="sm" variant="outline" className="w-full">
-                      RSVP
-                    </Button>
                   </div>
                 ))}
                 

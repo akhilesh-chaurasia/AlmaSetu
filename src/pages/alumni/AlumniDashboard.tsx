@@ -11,13 +11,17 @@ import Header from '@/components/layout/Header';
 import StartupPortal from '@/components/StartupPortal';
 import BackButton from '@/components/ui/back-button';
 import mentorshipBg from '@/assets/mentorship-bg.jpg';
+import sarahChenAvatar from '@/assets/avatars/sarah-chen.jpg';
+import alexJohnsonAvatar from '@/assets/avatars/alex-johnson.jpg';
+import networkingMixerImage from '@/assets/events/networking-mixer.jpg';
+import panelDiscussionImage from '@/assets/events/panel-discussion.jpg';
 
 const AlumniDashboard: React.FC = () => {
   const user = {
     name: 'Sarah Chen',
     email: 'sarah.chen@gmail.com',
     role: 'alumni' as const,
-    avatar: ''
+    avatar: sarahChenAvatar
   };
 
   const mentorshipRequests = [
@@ -29,7 +33,8 @@ const AlumniDashboard: React.FC = () => {
       interests: ['React', 'Node.js', 'Career Guidance'],
       message: 'Hi Sarah! I\'m interested in pursuing a career in software engineering and would love to learn from your experience at Google.',
       matchScore: 92,
-      requestDate: '2 days ago'
+      requestDate: '2 days ago',
+      avatar: alexJohnsonAvatar
     },
     {
       id: 2,
@@ -39,7 +44,8 @@ const AlumniDashboard: React.FC = () => {
       interests: ['Product Management', 'Tech Leadership', 'Startups'],
       message: 'Hello! I\'m graduating soon and considering product management roles. Your background would be incredibly valuable.',
       matchScore: 87,
-      requestDate: '1 week ago'
+      requestDate: '1 week ago',
+      avatar: ''
     }
   ];
 
@@ -175,26 +181,27 @@ const AlumniDashboard: React.FC = () => {
               <CardContent className="space-y-4">
                 {mentorshipRequests.map((request) => (
                   <div key={request.id} className="p-4 border rounded-lg space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <Avatar className="h-10 w-10">
-                          <AvatarFallback className="bg-gradient-primary text-white">
-                            {request.student.split(' ').map(n => n[0]).join('')}
-                          </AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <div className="flex items-center space-x-2">
-                            <h4 className="font-semibold">{request.student}</h4>
-                            <Badge variant="outline" className="text-xs">
-                              {request.matchScore}% match
-                            </Badge>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage src={request.avatar} />
+                            <AvatarFallback className="bg-gradient-primary text-white">
+                              {request.student.split(' ').map(n => n[0]).join('')}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="flex items-center space-x-2">
+                              <h4 className="font-semibold">{request.student}</h4>
+                              <Badge variant="outline" className="text-xs">
+                                {request.matchScore}% match
+                              </Badge>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                              {request.major} • {request.year} • {request.requestDate}
+                            </p>
                           </div>
-                          <p className="text-sm text-muted-foreground">
-                            {request.major} • {request.year} • {request.requestDate}
-                          </p>
                         </div>
                       </div>
-                    </div>
                     
                     <div className="flex flex-wrap gap-1 mb-2">
                       {request.interests.map((interest) => (
@@ -362,29 +369,46 @@ const AlumniDashboard: React.FC = () => {
                     date: 'March 22, 2024',
                     time: '2:00 PM',
                     type: 'Speaking',
-                    attendees: 45
+                    attendees: 45,
+                    image: panelDiscussionImage
                   },
                   {
                     title: 'Alumni Networking Mixer',
                     date: 'March 28, 2024',
                     time: '6:00 PM',
                     type: 'Hosting',
-                    attendees: 120
+                    attendees: 120,
+                    image: networkingMixerImage
                   }
                 ].map((event, index) => (
-                  <div key={index} className="p-3 border rounded-lg space-y-2">
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-semibold text-sm">{event.title}</h4>
-                      <Badge variant="outline" className="text-xs">{event.type}</Badge>
+                  <div key={index} className="group">
+                    <div className="relative overflow-hidden rounded-lg mb-3">
+                      {event.image && (
+                        <img 
+                          src={event.image} 
+                          alt={event.title}
+                          className="w-full h-24 object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <Badge 
+                        variant="outline" 
+                        className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm text-xs"
+                      >
+                        {event.type}
+                      </Badge>
                     </div>
-                    <div className="text-xs text-muted-foreground space-y-1">
-                      <div className="flex items-center">
-                        <Clock className="mr-1 h-3 w-3" />
-                        {event.date} at {event.time}
-                      </div>
-                      <div className="flex items-center">
-                        <Users className="mr-1 h-3 w-3" />
-                        {event.attendees} registered
+                    <div className="p-3 border rounded-lg space-y-2 group-hover:shadow-md transition-shadow">
+                      <h4 className="font-semibold text-sm">{event.title}</h4>
+                      <div className="text-xs text-muted-foreground space-y-1">
+                        <div className="flex items-center">
+                          <Clock className="mr-1 h-3 w-3" />
+                          {event.date} at {event.time}
+                        </div>
+                        <div className="flex items-center">
+                          <Users className="mr-1 h-3 w-3" />
+                          {event.attendees} registered
+                        </div>
                       </div>
                     </div>
                   </div>
