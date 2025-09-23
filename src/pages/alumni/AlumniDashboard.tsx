@@ -112,11 +112,17 @@ const AlumniDashboard: React.FC = () => {
     <div className="min-h-screen bg-background">
       <Header user={user} />
       
-      {/* Background */}
-      <div 
-        className="fixed inset-0 bg-cover bg-center bg-no-repeat opacity-5"
-        style={{ backgroundImage: `url(${mentorshipBg})` }}
-      />
+      {/* Interactive Background */}
+      <div className="fixed inset-0 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10 transform hover:scale-105 transition-transform duration-700"
+          style={{ backgroundImage: `url(${mentorshipBg})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-success/5 via-transparent to-warning/5" />
+        <div className="absolute top-32 right-32 w-80 h-80 bg-success/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-32 left-32 w-64 h-64 bg-warning/10 rounded-full blur-3xl animate-pulse delay-500" />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 bg-primary/5 rounded-full blur-2xl animate-pulse delay-1500" />
+      </div>
       
       <div className="relative z-10 container px-6 py-8">
         <BackButton to="/" />

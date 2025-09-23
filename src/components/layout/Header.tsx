@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Bell, Search, User, Settings, LogOut, MessageSquare, Briefcase, Filter } from 'lucide-react';
+import { Bell, Search, User, Settings, LogOut, MessageSquare, Briefcase, Filter, Lightbulb, Users, Calendar, Building2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/enhanced-button';
 import { Input } from '@/components/ui/input';
@@ -98,13 +98,79 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-6">
         {/* Logo */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-8">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">SA</span>
             </div>
             <span className="font-semibold text-lg">Smart Alumni</span>
           </div>
+
+          {/* Navigation Features */}
+          {user && (
+            <nav className="hidden lg:flex items-center space-x-6">
+              {user.role === 'alumni' && (
+                <>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Lightbulb className="h-4 w-4" />
+                    <span>Startup Portal</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <MessageSquare className="h-4 w-4" />
+                    <span>Mentorship</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Users className="h-4 w-4" />
+                    <span>Community</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Briefcase className="h-4 w-4" />
+                    <span>Jobs</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Calendar className="h-4 w-4" />
+                    <span>Events</span>
+                  </Button>
+                </>
+              )}
+              {user.role === 'student' && (
+                <>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Lightbulb className="h-4 w-4" />
+                    <span>Startup Portal</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Users className="h-4 w-4" />
+                    <span>Mentors</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Briefcase className="h-4 w-4" />
+                    <span>Jobs</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Calendar className="h-4 w-4" />
+                    <span>Events</span>
+                  </Button>
+                </>
+              )}
+              {user.role === 'admin' && (
+                <>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Users className="h-4 w-4" />
+                    <span>Users</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Building2 className="h-4 w-4" />
+                    <span>Analytics</span>
+                  </Button>
+                  <Button variant="ghost" size="sm" className="flex items-center space-x-1 hover:text-primary">
+                    <Calendar className="h-4 w-4" />
+                    <span>Events</span>
+                  </Button>
+                </>
+              )}
+            </nav>
+          )}
         </div>
 
         {/* Search */}
