@@ -8,7 +8,6 @@ import RoleSelection from "./pages/RoleSelection";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import AlumniDashboard from "./pages/alumni/AlumniDashboard";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import Timeline from "./pages/Timeline";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
 import NotFound from "./pages/NotFound";
@@ -29,7 +28,6 @@ const App = () => (
           <Route path="/student/dashboard" element={<StudentDashboard />} />
           <Route path="/alumni/dashboard" element={<AlumniDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/timeline" element={<Timeline />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
