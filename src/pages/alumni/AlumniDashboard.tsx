@@ -13,7 +13,11 @@ import MetricsWidget from '@/components/widgets/MetricsWidget';
 import ActivityWidget from '@/components/widgets/ActivityWidget';
 import ChartWidget from '@/components/widgets/ChartWidget';
 import QuickActionsWidget from '@/components/widgets/QuickActionsWidget';
+import TimelineWidget from '@/components/widgets/TimelineWidget';
 import mentorshipBg from '@/assets/mentorship-bg.jpg';
+import careerFair from '@/assets/events/career-fair.jpg';
+import networkingMixer from '@/assets/events/networking-mixer.jpg';
+import panelDiscussion from '@/assets/events/panel-discussion.jpg';
 
 const AlumniDashboard: React.FC = () => {
   const user = {
@@ -150,6 +154,99 @@ const AlumniDashboard: React.FC = () => {
     }
   ];
 
+  const alumniTimelineEvents = [
+    {
+      id: '1',
+      title: 'Graduation Ceremony 2018',
+      date: 'May 20, 2018',
+      year: '2018',
+      type: 'academic' as const,
+      description: 'A memorable day when Sarah Chen graduated with honors in Computer Science. The ceremony celebrated achievements of 2,500 graduates.',
+      location: 'Main Stadium',
+      image: panelDiscussion,
+      attendees: 15000,
+      likes: 892,
+      isLiked: true,
+      tags: ['Graduation', 'Achievement', 'Milestone'],
+      organizer: 'University Administration'
+    },
+    {
+      id: '2',
+      title: 'Tech Innovation Summit 2017',
+      date: 'November 12, 2017',
+      year: '2017',
+      type: 'academic' as const,
+      description: 'Sarah presented her final year project on AI-powered healthcare solutions. This event launched her career in tech.',
+      location: 'Innovation Hub',
+      image: careerFair,
+      attendees: 800,
+      likes: 245,
+      isLiked: true,
+      tags: ['Innovation', 'AI', 'Healthcare', 'Presentation'],
+      organizer: 'Computer Science Department'
+    },
+    {
+      id: '3',
+      title: 'Cultural Festival 2016',
+      date: 'March 18-20, 2016',
+      year: '2016',
+      type: 'cultural' as const,
+      description: 'Sarah performed in the annual cultural festival and helped organize the international food fair. A celebration of global diversity.',
+      location: 'Central Courtyard',
+      image: networkingMixer,
+      attendees: 4500,
+      likes: 567,
+      isLiked: true,
+      tags: ['Culture', 'Performance', 'International', 'Food'],
+      organizer: 'International Students Association'
+    },
+    {
+      id: '4',
+      title: 'Hackathon Championship 2016',
+      date: 'October 15-16, 2016',
+      year: '2016',
+      type: 'workshop' as const,
+      description: 'Sarah\'s team won first place in the 48-hour hackathon with their mobile app for campus sustainability.',
+      location: 'Computer Labs Building',
+      image: careerFair,
+      attendees: 350,
+      likes: 189,
+      isLiked: false,
+      tags: ['Hackathon', 'Winner', 'Sustainability', 'Mobile App'],
+      organizer: 'Coding Club'
+    },
+    {
+      id: '5',
+      title: 'Freshman Welcome Week 2014',
+      date: 'August 25-30, 2014',
+      year: '2014',
+      type: 'cultural' as const,
+      description: 'Sarah\'s first week at college - making friends, joining clubs, and discovering her passion for computer science.',
+      location: 'Various Campus Locations',
+      image: networkingMixer,
+      attendees: 3200,
+      likes: 423,
+      isLiked: true,
+      tags: ['Freshman', 'Welcome', 'New Beginnings', 'Friendship'],
+      organizer: 'Student Life Committee'
+    },
+    {
+      id: '6',
+      title: 'Annual Sports Meet 2015',
+      date: 'February 10-14, 2015',
+      year: '2015',
+      type: 'sports' as const,
+      description: 'Sarah participated in badminton doubles and helped her residence hall win the overall championship trophy.',
+      location: 'Sports Complex',
+      image: panelDiscussion,
+      attendees: 2800,
+      likes: 298,
+      isLiked: false,
+      tags: ['Sports', 'Badminton', 'Championship', 'Team Spirit'],
+      organizer: 'Sports Committee'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       <Header user={user} />
@@ -215,6 +312,13 @@ const AlumniDashboard: React.FC = () => {
             <ActivityWidget
               title="Recent Alumni Activities"
               activities={activityData}
+            />
+
+            {/* Alumni Timeline - College Years */}
+            <TimelineWidget
+              title="Your College Journey"
+              events={alumniTimelineEvents}
+              userRole="alumni"
             />
           </div>
 

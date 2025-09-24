@@ -14,7 +14,11 @@ import MetricsWidget from '@/components/widgets/MetricsWidget';
 import ActivityWidget from '@/components/widgets/ActivityWidget';
 import ChartWidget from '@/components/widgets/ChartWidget';
 import QuickActionsWidget from '@/components/widgets/QuickActionsWidget';
+import TimelineWidget from '@/components/widgets/TimelineWidget';
 import dashboardBg from '@/assets/dashboard-bg.jpg';
+import careerFair from '@/assets/events/career-fair.jpg';
+import networkingMixer from '@/assets/events/networking-mixer.jpg';
+import panelDiscussion from '@/assets/events/panel-discussion.jpg';
 
 const StudentDashboard: React.FC = () => {
   const user = {
@@ -152,6 +156,99 @@ const StudentDashboard: React.FC = () => {
     }
   ];
 
+  const timelineEvents = [
+    {
+      id: '1',
+      title: 'Annual Tech Fest 2024',
+      date: 'March 15-17, 2024',
+      year: '2024',
+      type: 'cultural' as const,
+      description: 'The biggest technology festival showcasing innovation, robotics competitions, and hackathons. Over 5000 participants from 50+ colleges.',
+      location: 'Main Campus Auditorium',
+      image: careerFair,
+      attendees: 5000,
+      likes: 324,
+      isLiked: true,
+      tags: ['Technology', 'Innovation', 'Competition'],
+      organizer: 'Tech Club'
+    },
+    {
+      id: '2',
+      title: 'Cultural Night 2023',
+      date: 'December 10, 2023',
+      year: '2023',
+      type: 'cultural' as const,
+      description: 'A spectacular evening celebrating diversity with dance, music, and theatrical performances from students worldwide.',
+      location: 'Open Air Theatre',
+      image: networkingMixer,
+      attendees: 2500,
+      likes: 189,
+      isLiked: false,
+      tags: ['Culture', 'Dance', 'Music', 'Theatre'],
+      organizer: 'Cultural Committee'
+    },
+    {
+      id: '3',
+      title: 'Industry Expert Panel 2023',
+      date: 'November 5, 2023',
+      year: '2023',
+      type: 'academic' as const,
+      description: 'Leading industry experts shared insights on emerging technologies and career opportunities in tech.',
+      location: 'Conference Hall A',
+      image: panelDiscussion,
+      attendees: 800,
+      likes: 156,
+      isLiked: true,
+      tags: ['Career', 'Industry', 'Networking'],
+      organizer: 'Career Services'
+    },
+    {
+      id: '4',
+      title: 'Sports Championship 2023',
+      date: 'October 20-25, 2023',
+      year: '2023',
+      type: 'sports' as const,
+      description: 'Inter-college sports championship featuring cricket, basketball, football, and athletics competitions.',
+      location: 'Sports Complex',
+      image: careerFair,
+      attendees: 1200,
+      likes: 98,
+      isLiked: false,
+      tags: ['Sports', 'Competition', 'Fitness'],
+      organizer: 'Sports Committee'
+    },
+    {
+      id: '5',
+      title: 'Alumni Homecoming 2023',
+      date: 'September 15, 2023',
+      year: '2023',
+      type: 'networking' as const,
+      description: 'Alumni from the past 20 years returned to share experiences and network with current students.',
+      location: 'Grand Lawn',
+      image: networkingMixer,
+      attendees: 1500,
+      likes: 267,
+      isLiked: true,
+      tags: ['Alumni', 'Networking', 'Career'],
+      organizer: 'Alumni Association'
+    },
+    {
+      id: '6',
+      title: 'Research Symposium 2022',
+      date: 'April 8-10, 2022',
+      year: '2022',
+      type: 'academic' as const,
+      description: 'Students and faculty presented groundbreaking research in AI, biotechnology, and sustainable engineering.',
+      location: 'Research Center',
+      image: panelDiscussion,
+      attendees: 600,
+      likes: 134,
+      isLiked: false,
+      tags: ['Research', 'Innovation', 'Science'],
+      organizer: 'Research Committee'
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       <Header user={user} />
@@ -217,6 +314,13 @@ const StudentDashboard: React.FC = () => {
             <ActivityWidget
               title="Recent Activity"
               activities={activityData}
+            />
+
+            {/* College Timeline */}
+            <TimelineWidget
+              title="College Memories & Events"
+              events={timelineEvents}
+              userRole="student"
             />
           </div>
 
