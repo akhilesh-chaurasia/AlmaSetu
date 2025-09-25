@@ -80,7 +80,7 @@ const SignIn: React.FC = () => {
             </div>
             <CardTitle className="text-2xl">Welcome Back</CardTitle>
             <CardDescription>
-              Sign in to your Smart Alumni account
+              Sign in to your Alma Setu account
             </CardDescription>
           </CardHeader>
           
@@ -133,7 +133,7 @@ const SignIn: React.FC = () => {
             <form onSubmit={handleSignIn} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="role">Sign in as</Label>
-                <Select value={role} onValueChange={(value: 'student' | 'alumni' | 'admin') => setRole(value)}>
+                <Select value={role} onValueChange={(value: 'student' | 'alumni' | 'admin' ) => setRole(value)}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -141,6 +141,7 @@ const SignIn: React.FC = () => {
                     <SelectItem value="student">Student</SelectItem>
                     <SelectItem value="alumni">Alumni</SelectItem>
                     <SelectItem value="admin">Administrator</SelectItem>
+                    <SelectItem value="admin">Recruiter</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -200,7 +201,7 @@ const SignIn: React.FC = () => {
                 </Button>
               </div>
 
-              <Button type="submit" variant="gradient" className="w-full">
+              <Button type="submit" variant="gradient" className="w-full bg-blue-600">
                 Sign In
               </Button>
             </form>

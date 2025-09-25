@@ -24,8 +24,8 @@ import mentorshipBg from '@/assets/mentorship-bg.jpg';
 
 const StudentDashboard: React.FC = () => {
   const user = {
-    name: 'Alex Johnson',
-    email: 'alex.johnson@university.edu',
+    name: 'Ayush',
+    email: 'Ayush@university.edu',
     role: 'student' as const,
     avatar: ''
   };
@@ -81,7 +81,7 @@ const StudentDashboard: React.FC = () => {
       description: 'Software Engineer Intern at TechCorp',
       timestamp: '2 hours ago',
       icon: Briefcase,
-      user: 'Alex Johnson'
+      user: 'Sagar'
     },
     {
       id: '2',
@@ -90,7 +90,7 @@ const StudentDashboard: React.FC = () => {
       description: 'Career guidance session with Sarah Chen',
       timestamp: '1 day ago',
       icon: Users,
-      user: 'Sarah Chen'
+      user: 'Aniket '
     },
     {
       id: '3',
@@ -99,7 +99,7 @@ const StudentDashboard: React.FC = () => {
       description: 'React Development - Score: 88/100',
       timestamp: '2 days ago',
       icon: Award,
-      user: 'Alex Johnson'
+      user: 'Akhilesh'
     },
     {
       id: '4',

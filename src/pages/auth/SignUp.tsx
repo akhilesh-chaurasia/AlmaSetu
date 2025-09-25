@@ -79,7 +79,7 @@ const SignUp: React.FC = () => {
                 <Building2 className="h-8 w-8 text-white" />
               )}
             </div>
-            <CardTitle className="text-2xl">Join Smart Alumni</CardTitle>
+            <CardTitle className="text-2xl">Join Alma Setu</CardTitle>
             <CardDescription>
               Step {step} of 3: Create your account
             </CardDescription>

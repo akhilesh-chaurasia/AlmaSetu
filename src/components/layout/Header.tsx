@@ -29,7 +29,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
   const [notifications] = React.useState([
     { 
       id: 1, 
-      text: "New mentorship request from Sarah Chen", 
+      text: "New mentorship request from Rajesh", 
       unread: true, 
       type: 'mentorship',
       time: '5 min ago',
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
     },
     { 
       id: 5, 
-      text: "New message from Michael Rodriguez", 
+      text: "New message from sagar", 
       unread: true, 
       type: 'message',
       time: '3 days ago',
@@ -101,9 +101,9 @@ const Header: React.FC<HeaderProps> = ({ user }) => {
         <div className="flex items-center space-x-8">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">SA</span>
+              <span className="text-white font-bold text-sm">AS</span>
             </div>
-            <span className="font-semibold text-lg">Smart Alumni</span>
+            <span className="font-semibold text-lg">ALMA SETU</span>
           </div>
 
           {/* Navigation Features */}
