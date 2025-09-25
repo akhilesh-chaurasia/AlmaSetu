@@ -1,7 +1,7 @@
 import React from 'react';
 import { 
   Users, Briefcase, Calendar, TrendingUp, MessageSquare, 
-  GraduationCap, Award, Building2, Network, Zap, UserCheck
+  GraduationCap, Award, Building2, Network, Zap, UserCheck, Users2
 } from 'lucide-react';
 import { Button } from '@/components/ui/enhanced-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,6 +18,7 @@ import mentorshipBg from '@/assets/mentorship-bg.jpg';
 import careerFair from '@/assets/events/career-fair.jpg';
 import networkingMixer from '@/assets/events/networking-mixer.jpg';
 import panelDiscussion from '@/assets/events/panel-discussion.jpg';
+import startupBg from '@/assets/startup-bg.jpg';
 
 const AlumniDashboard: React.FC = () => {
   const user = {
@@ -314,10 +315,102 @@ const AlumniDashboard: React.FC = () => {
               activities={activityData}
             />
 
-            {/* Alumni Timeline - College Years */}
+            {/* Alumni College Journey Categories */}
+            <Card className="widget-container">
+              <CardHeader className="widget-header">
+                <CardTitle className="flex items-center">
+                  <Calendar className="h-5 w-5 mr-2 text-primary" />
+                  Your College Journey & Timeline
+                </CardTitle>
+                <CardDescription>
+                  Relive your college experiences across different areas
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="widget-content">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                  {[
+                    {
+                      title: 'Startup Portal',
+                      description: 'Your entrepreneurial journey & ventures',
+                      icon: Building2,
+                      color: 'bg-purple-500',
+                      count: '5 Projects',
+                      image: startupBg
+                    },
+                    {
+                      title: 'Mentorship',
+                      description: 'Mentors who guided your path', 
+                      icon: Users2,
+                      color: 'bg-blue-500',
+                      count: '8 Mentors',
+                      image: mentorshipBg
+                    },
+                    {
+                      title: 'Community',
+                      description: 'Cultural events & social connections',
+                      icon: Users,
+                      color: 'bg-green-500',
+                      count: '12 Events',
+                      image: networkingMixer
+                    },
+                    {
+                      title: 'Jobs & Career',
+                      description: 'Career milestones & opportunities',
+                      icon: Briefcase,
+                      color: 'bg-orange-500',
+                      count: '4 Roles',
+                      image: careerFair
+                    },
+                    {
+                      title: 'College Events',
+                      description: 'Academic achievements & competitions',
+                      icon: Award,
+                      color: 'bg-pink-500',
+                      count: '15 Events',
+                      image: panelDiscussion
+                    }
+                  ].map((category, index) => (
+                    <div key={index} className="group cursor-pointer" onClick={() => window.location.href = '/timeline'}>
+                      <div className="relative overflow-hidden rounded-lg bg-white border border-border hover:shadow-lg transition-all duration-300">
+                        <div className="aspect-video relative">
+                          <img 
+                            src={category.image} 
+                            alt={category.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                          <div className={`absolute top-3 right-3 ${category.color} text-white p-2 rounded-full`}>
+                            <category.icon className="h-4 w-4" />
+                          </div>
+                          <div className="absolute bottom-3 left-3 text-white">
+                            <Badge variant="secondary" className="text-xs mb-1">
+                              {category.count}
+                            </Badge>
+                          </div>
+                        </div>
+                        <div className="p-4">
+                          <h3 className="font-semibold text-sm mb-1">{category.title}</h3>
+                          <p className="text-xs text-muted-foreground line-clamp-2">{category.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                <Button 
+                  className="w-full corporate-button" 
+                  onClick={() => window.location.href = '/timeline'}
+                >
+                  <Calendar className="h-4 w-4 mr-2" />
+                  View Complete Timeline
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Recent Alumni Memories */}
             <TimelineWidget
-              title="Your College Journey"
-              events={alumniTimelineEvents}
+              title="Your College Memories"
+              events={alumniTimelineEvents.slice(0, 3)}
               userRole="alumni"
             />
           </div>
