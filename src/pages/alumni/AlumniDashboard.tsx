@@ -370,7 +370,11 @@ const AlumniDashboard: React.FC = () => {
                       image: panelDiscussion
                     }
                   ].map((category, index) => (
-                    <div key={index} className="group cursor-pointer" onClick={() => window.location.href = '/timeline'}>
+                    <div 
+                      key={index} 
+                      className="group cursor-pointer" 
+                      onClick={() => window.location.href = category.title === 'Community' ? '/community' : '/timeline'}
+                    >
                       <div className="relative overflow-hidden rounded-lg bg-white border border-border hover:shadow-lg transition-all duration-300">
                         <div className="aspect-video relative">
                           <img 
