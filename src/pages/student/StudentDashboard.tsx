@@ -21,6 +21,7 @@ import networkingMixer from '@/assets/events/networking-mixer.jpg';
 import panelDiscussion from '@/assets/events/panel-discussion.jpg';
 import startupBg from '@/assets/startup-bg.jpg';
 import mentorshipBg from '@/assets/mentorship-bg.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const StudentDashboard: React.FC = () => {
   const user = {
@@ -250,7 +251,7 @@ const StudentDashboard: React.FC = () => {
       organizer: 'Research Committee'
     }
   ];
-
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       <Header user={user} />
@@ -402,7 +403,7 @@ const StudentDashboard: React.FC = () => {
                 
                 <Button 
                   className="w-full corporate-button" 
-                  onClick={() => window.location.href = '/timeline'}
+                  onClick={() => navigate('/timeline')}
                 >
                   <Calendar className="h-4 w-4 mr-2" />
                   View Complete Timeline

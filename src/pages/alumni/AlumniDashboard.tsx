@@ -19,7 +19,7 @@ import careerFair from '@/assets/events/career-fair.jpg';
 import networkingMixer from '@/assets/events/networking-mixer.jpg';
 import panelDiscussion from '@/assets/events/panel-discussion.jpg';
 import startupBg from '@/assets/startup-bg.jpg';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AlumniDashboard: React.FC = () => {
   const user = {
@@ -248,7 +248,7 @@ const AlumniDashboard: React.FC = () => {
       organizer: 'Sports Committee'
     }
   ];
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-secondary/20">
       <Header user={user} />
@@ -404,7 +404,7 @@ const navigate = useNavigate();
                 
                 <Button 
                   className="w-full corporate-button" 
-                  // onClick={() =>  = '/timeline'}
+                  // onClick={() => window.location.href = '/timeline'}
                   onClick={()=>navigate('/timeline')}
                 >
                   <Calendar className="h-4 w-4 mr-2" />
