@@ -116,14 +116,18 @@ const SignUp: React.FC = () => {
                     <Label>I am a</Label>
                     <div className="grid grid-cols-2 gap-2">
                       <Button
-                        type="button"
-                        variant={formData.role === 'student' ? 'default' : 'outline'}
-                        onClick={() => updateFormData('role', 'student')}
-                        className="flex flex-col items-center p-4 h-auto"
-                      >
-                        <GraduationCap className="h-6 w-6 mb-2" />
+                           variant="default"
+                          className={`flex flex-col items-center p-4 h-auto
+                               ${formData.role === 'student'
+                                ? 'bg-slate-600 text-white hover:bg-blue-600' // selected + custom hover
+                              : 'bg-transparent border hover:bg-gray-100'}   // unselected
+                                `}
+                          onClick={() => updateFormData('role', 'student')}
+                        >
+                      <GraduationCap className="h-6 w-6 mb-2" />
                         Student
                       </Button>
+
                       <Button
                         type="button"
                         variant={formData.role === 'alumni' ? 'default' : 'outline'}
